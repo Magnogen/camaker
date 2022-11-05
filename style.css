@@ -1,0 +1,30 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+main {
+  height: 100%;
+  background: hsl(220, 10%, 10%);
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+}
+
+canvas {
+/*   visibility: hidden; */
+  width:  75vmin;
+  height: 75vmin;
+  display: inline;
+  image-rendering: optimizeSpeed;             /* Older versions of FF          */
+  image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
+  image-rendering: -webkit-optimize-contrast; /* Safari                        */
+  image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+) */
+  image-rendering: pixelated;                 /* Awesome future-browsers       */
+  -ms-interpolation-mode: nearest-neighbor;   /* IE                            */
+}
