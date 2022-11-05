@@ -26,26 +26,26 @@
   };
   // console.log(zone_types['x'](0, 2))
   let cells = [
-    { // red
-      id: 'r',
+    {
+      id: 'a',
       col: 'hsl(210, 60%, 50%)',
       // zone_type: 'd',
       r: 5,
-      convert: ({ r, g, b }) => ({ r: r, g: r })
+      convert: ({ a, b, c }) => ({ b: a })
     },
-    { // green
-      id: 'g',
+    {
+      id: 'b',
       col: 'hsl(220, 60%, 50%)',
       // zone_type: 'd',
       r: 5,
-      convert: ({ r, g, b }) => ({ g: g, b: g })
+      convert: ({ a, b, c }) => ({ c: b })
     },
-    { // blue
-      id: 'b',
+    {
+      id: 'c',
       col: 'hsl(230, 60%, 50%)',
       // zone_type: 'd',
       r: 5,
-      convert: ({ r, g, b }) => ({ b: b, r: b })
+      convert: ({ a, b, c }) => ({ a: c })
     }
   ];
   
