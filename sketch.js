@@ -6,6 +6,10 @@
   EventTarget.prototype.on = function (...args) { return this.addEventListener(...args) };
   EventTarget.prototype.trigger = function (name, options={}) { return this.dispatchEvent(Object.assign(new Event(name), options)) };
 
+  const min = (a, b) => a < b ? a : b;
+  const max = (a, b) => a > b ? a : b;
+  const choose = arr => arr[0|(Math.random()*arr.length)];
+  
   let c = $('canvas');
   let ctx = c.getContext('2d');
 
@@ -24,7 +28,6 @@
     'r': (x, y) => Math.random() < 0.5,
     'd': (x,y,r)=> Math.abs(x) + Math.abs(y) <= r,
   };
-  // console.log(zone_types['x'](0, 2))
   let cells = [
     {
       id: 'a',
@@ -53,10 +56,8 @@
     a[cells[i].id] = i;
     return a;
   }, {});
-  const min = (a, b) => a < b ? a : b;
-  const max = (a, b) => a > b ? a : b;
-  const choose = arr => arr[0|(Math.random()*arr.length)];
-  function tap(x, y) {
+  
+  function update(x, y) {
     let me = grid[x][y];
     let mapper = { ...map, ...cells[me].convert(map)};
     const r = cells[me].r;
@@ -81,48 +82,15 @@
     }
   }
   
-  function draw_all() {
-    for (let x = 0; x < grid.length; x++) for (let y = 0; y < grid[x].length; y++) {
-      ctx.fillStyle = cells[grid[x][y]].col;
-      ctx.fillRect(x, y, 1, 1);
-    }
+  for (let x = 0; x < grid.length; x++) for (let y = 0; y < grid[x].length; y++) {
+    ctx.fillStyle = cells[grid[x][y]].col;
+    ctx.fillRect(x, y, 1, 1);
   }
-  
-  draw_all();
-  
-  let { width: w, height: h } = c.getBoundingClientRect();
-  let ready = true;
-  c.on('click', e => {
-    let px = e._p ? e._px : 0|(width  * e.offsetX / w),
-        py = e._p ? e._py : 0|(height * e.offsetY / h);
-    tap(px, py);
-    // ready = true;
-  });
-  
-  // let x = 0;
-  // let y = 0;
-  // while (!ready) await new Promise(requestAnimationFrame);
-  // let last;
-  // end: while (true) {
-  //   last = performance.now();
-  //   while (performance.now() - last < 1000/30) {
-  //     c.trigger('click', { _p: true, _px: x, _py: y });
-  //     x++;
-  //     if (x > width-1) {
-  //       x = 0;
-  //       y++;
-  //     }
-  //     if (y > height-1) break end;
-  //   }
-  //   for (let i = 0; i < 1; i++) {
-  //     await new Promise(requestAnimationFrame);
-  //   }
-  // }
   
   while (true) {
     let last = performance.now();
     while (performance.now() - last < 1000/30) {
-      c.trigger('click', { offsetX: Math.random()*w, offsetY: Math.random()*h });
+      update(0|(Math.random()*width), 0|(Math.random()*width));
     }
     await new Promise(requestAnimationFrame);
   }
