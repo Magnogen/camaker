@@ -1,4 +1,5 @@
 // jshint esversion: 11
+let speed = 1;
 (async () => {
   
   const $ = query => document.querySelector(query);
@@ -84,8 +85,8 @@
   
   do {
     let last = performance.now();
-    let count = 0;
-    while (performance.now() - last < 1000/30 && count++ < 2*width) {
+    let count = width*speed;
+    while (performance.now() - last < 1000/30 && count-- > 0) {
       update(0|(Math.random()*width), 0|(Math.random()*height));
     }
     await new Promise(requestAnimationFrame);
