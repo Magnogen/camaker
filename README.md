@@ -1,5 +1,5 @@
 # camaker
-###### https://magnogen.net/camaker Make your own Cellular Automata
+###### Make your own Cellular Automata https://magnogen.net/camaker
 
 Camaker (kam-akker, see-ay-may-ker, etc) is a way for you to make your own Cellular Automata with a friendly interface.
 I'm not quite sure what that interface will look like yet, but I hope to take some inspiration from:
